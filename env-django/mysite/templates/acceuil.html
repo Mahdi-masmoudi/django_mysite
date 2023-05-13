@@ -1,0 +1,98 @@
+{% include 'magasin/base.html' %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block content %}
+
+<div class="container my-5">
+  <form method="POST" class="post-form">
+    {% csrf_token %}
+    {% if user.is_superuser %}
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button type="button" enctype="multipart/form-data" class="btn btn-primary">
+          <a href="{% url 'edit' %}" class="text-white">Ajouter un article</a>
+        </button>
+      </div>
+      {% for article in list %}
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <img
+            src="/media/{{ article.image }}"
+            class="card-img-top"
+            height="200px"
+            width="200px"
+            alt="{{ article.libelle }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ article.libelle }}</h5>
+            <p class="card-text">{{ article.description }}</p>
+            <p class="card-text">{{ article.prix }} DT</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-popup">
+                  <a
+                    href="{% url 'product_det' article.id %}"
+                    class="text-primary"
+                    >Voir</a
+                  >
+                </button>
+
+                <button type="button" class="btn btn-sm">
+                  <a
+                    href="{% url 'edit_product' article.id %}"
+                    class="text-secondary"
+                    >Modifier</a
+                  >
+                </button>
+                <button type="button" class="btn btn-sm btn-outline">
+                  <a href="{% url 'deleteProd' article.id%}" class="text-danger"
+                    >Supprimer</a
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button type="button" class="btn btn-primary">
+          <a href="{% url 'edit' %}" class="text-white">Ajouter un article</a>
+        </button>
+      </div>
+      {% for article in list %}
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <img
+            src="/media/{{ article.image }}"
+            class="card-img-top"
+            height="200px"
+            width="200px"
+            alt="{{ article.libelle }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ article.libelle }}</h5>
+            <p class="card-text">{{ article.description }}</p>
+            <p class="card-text">{{ article.prix }} DT</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-popup">
+                  <a
+                    href="{% url 'product_det' article.id %}"
+                    class="text-primary"
+                    >Voir</a
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </form>
+</div>
+{% endblock %}

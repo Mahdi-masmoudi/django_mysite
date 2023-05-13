@@ -1,0 +1,40 @@
+{% include 'magasin/base.html' %} {% load static %}{% block content %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Bootstrap HTML -->
+<form method="POST" class="post-form">
+  {% csrf_token %}
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col-md-12 text-center">
+          <h2>Modifier le Produit{{ produit.id }}</h2>
+        </div>
+        <form method="POST" class="post-form">
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="sumit" class="btn btn-primary">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Bootstrap CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css"
+  integrity="sha512-FpiHsebX9PeYRbwlypD1wqb8mzJhOm7VqbTGVbDlw7ZEsxNCp/9sV4mf4pxuUMwV2aE4u4YYTR1F/h16G69bWQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<!-- Bootstrap JS -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"
+  integrity="sha512-8IhrqaTFtrRbzzRmBY+n1tu+TXnOALgGmAEUdZEl9L1feU6rjD/vC83tHptzjJ54h4f4g4QPG5mcDIZZnBxvJQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+{% endblock %}
